@@ -10,7 +10,7 @@ def send_embed(webhook_url, folder_name, cooldown=None):
 
     try:
         if not webhook_url:
-            print("Webhook URL is not provided. Please set a valid webhook URL.")
+            print("Please provide a valid webhook URL as it is currently missing.")
             return
 
         colorama.init()
