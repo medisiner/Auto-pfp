@@ -27,9 +27,9 @@ def send_embed(webhook_url, folder_name, cooldown=None):
                 print("\033[91mNo image files found in the specified folder.\033[0m")
                 return
 
-            random_image = random.choice(image_files)
-            image_path = os.path.join(folder_path, random_image)
-            _, file_extension = os.path.splitext(random_image)
+            r_image = random.choice(image_files)
+            image_path = os.path.join(folder_path, r_image)
+            _, file_extension = os.path.splitext(r_image)
 
             webhook = DiscordWebhook(url=webhook_url)
             embed = DiscordEmbed(color=0xFFFFFF)   
@@ -47,9 +47,9 @@ def send_embed(webhook_url, folder_name, cooldown=None):
             if response.status_code == 404:
                 print("\033[91mWebhook status code 404: Not Found. Please check your webhook URL.\033[0m")
             elif response.status_code != 200:
-                print(f"\033[91mError sending image '{random_image}'. Status code: {response.status_code}\033[0m")
+                print(f"\033[91mError sending image '{r_image}'. Status code: {response.status_code}\033[0m")
             else:
-                print(f"\033[38;2;200;157;216m'{random_image}' was sent to your webhook in an embed.\033[0m")
+                print(f"\033[38;2;200;157;216m'{r_image}' was sent to your webhook in an embed.\033[0m")
 
             time.sleep(cooldown)
 
