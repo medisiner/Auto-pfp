@@ -34,3 +34,5 @@ It's an easy way to send avatars, banners & what not to a channel for your serve
 ## Example
 
 python discord.py // or just run the file.
+
+![it working](https://cdn.discordapp.com/attachments/1194702956633788576/1199803801163550750/IMG_8299.png)
