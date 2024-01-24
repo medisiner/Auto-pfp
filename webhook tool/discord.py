@@ -1,21 +1,23 @@
 import os
 import random
 import time
+import colorama
 from discord_webhook import DiscordWebhook, DiscordEmbed
 
 def send_embed(webhook_url, folder_name, cooldown=None):
     if cooldown is None:
-        cooldown = 60  # Going back to line 65 -> if its left as "None" it'll use this.
+        cooldown = 60 # Going back to line 65 -> if its left as "None" it'll use this.
 
     try:
         if not webhook_url:
             print("Webhook URL is not provided. Please set a valid webhook URL.")
             return
 
-        print("\033[38;2;177;159;249mMaking sure everything is setup fine on your end.\033[0m")
+        colorama.init()
+
+        print("\033[38;2;177;159;249mMaking sure everything is set up fine on your end\033[0m")
 
         while True:
-
             current_directory = os.getcwd()
             folder_path = os.path.join(current_directory, folder_name)
             files = os.listdir(folder_path)
@@ -31,18 +33,16 @@ def send_embed(webhook_url, folder_name, cooldown=None):
 
             webhook = DiscordWebhook(url=webhook_url)
             embed = DiscordEmbed(color=0xFFFFFF)   
-                                # Custom embed colours
+                                 # Custom embed colours
             embed.set_author(name="your_author", icon_url="")
-                                                 # Add a URL here with an icon you'd like to use as the author icon.
+                                                # Add a URL here with an icon you'd like to use as the author icon.
             embed.set_image(url=f"attachment://image{file_extension}")
 
-            
             with open(image_path, "rb") as file:
                 webhook.add_file(file=file.read(), filename=f"image{file_extension}") 
                                                    # Rename the file if you'd like
             webhook.add_embed(embed)
             response = webhook.execute()
-
 
             if response.status_code == 404:
                 print("\033[91mWebhook status code 404: Not Found. Please check your webhook URL.\033[0m")
@@ -54,7 +54,7 @@ def send_embed(webhook_url, folder_name, cooldown=None):
             time.sleep(cooldown)
 
     except Exception as e:
-        print(f"\033[91mAn error occurred: {str(e)}\033[0m")
+        print(f"\033[91mAn error occurred: {str(e)} \033[0m")
 
 def main():
     # Your webhook that the embeds will send to
